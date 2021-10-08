@@ -1,20 +1,16 @@
 const { Book, User } = require('../models');
+const { AuthenticationError } = require('../utils/auth');
 
 const resolvers = {
   Query: {
-    me: async () =>
+    me: async (parent, args, context) =>
     {
-      return User.find({});
-    },
-
-    book: async () => {
-      return Book.find({});
-    },
-    user: async (parent, { _id }) => {
-      const params = _id ? { _id } : {};
-      return User.find(params);
+      if (context.user ) {
+      return user = User.findOne({})
+      }
     },
   },
+
    Mutation: {
      login: async (parent, {email,password}) => {
        const user = await User.findOne({email});
@@ -26,14 +22,15 @@ const resolvers = {
 
       return { token, user };
     },
-     createUser: async (parent, args) => {
+     addUser: async (parent, args) => {
      const user = await User.create(args);
-     return user;
+     const token = signToken(user);
+     return {token, user};
      },
-    saveBook: async (parent,  args) => {
+    saveBook: async (parent, args, context) => {
        const updatedUser = await User.findOneAndUpdate(
-         { _id },
-        { $addToSet: { savedBooks: body }},
+         { _id: context.user._id },
+        { $addToSet: { savedBooks: args.input }},
        { new: true },
        {runValidators: true }
        );

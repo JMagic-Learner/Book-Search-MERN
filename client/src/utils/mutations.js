@@ -35,16 +35,6 @@ mutation saveBook( $bookInput: String! ) {
 }
 `;
 
-export const SAVE_BOOK = gql`
-mutation saveBook( $bookInput: String! ) {
-    saveBook(bookInput: $bookInput) {
-        user {
-            _id
-            username
-        }
-    }
-}
-`;
 
 export const REMOVE_BOOK = gql`
 mutation removeBook( $bookInput: String! ) {

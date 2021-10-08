@@ -16,7 +16,8 @@
     "concurrently": "^5.1.0"
   },
   "dependencies": {
-    "apollo-client": "^2.6.10"
+    "apollo-client": "^2.6.10",
+    "graphql": "^15.6.1"
   },
   "repository": {
     "type": "git",
