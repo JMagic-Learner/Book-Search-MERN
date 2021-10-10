@@ -1,5 +1,5 @@
 const { gql } = require('apollo-server-express');
-
+// Use Input to condense the parameters into one entry.
 const typeDefs = gql`
     type User {
         _id: ID
@@ -20,6 +20,7 @@ const typeDefs = gql`
         image: String
         link: String
     }
+    
     input BookInput {
         bookId: ID
         authors: [String]
