@@ -22,7 +22,7 @@ server.applyMiddleware({ app });
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.listen(process.env.PORT || 3000);
+
 
 // if we're in production, serve client/build as static assets
 if (process.env.NODE_ENV === 'production') {
