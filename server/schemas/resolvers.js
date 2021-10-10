@@ -1,4 +1,4 @@
-const { Book, User } = require('../models');
+const { User } = require('../models');
 const { AuthenticationError } = require('../utils/auth');
 const { signToken } = require('../utils/auth')
 
@@ -33,11 +33,11 @@ const resolvers = {
      return {token, user};
      },
 
-    saveBook: async (parent, args, context) => {
+    saveBook: async (parent, {userID, bookData}, context) => {
       if (context.user) {
        const updatedUser = await User.findOneAndUpdate(
          { _id: context.user._id },
-        { $addToSet: { savedBooks: args.input }},
+        { $addToSet: { savedBooks: bookData }},
        { new: true },
        {runValidators: true }
        );
@@ -47,7 +47,7 @@ const resolvers = {
       throw new AuthenticationError("You are not logged in");
     },
 // Translating from user-controller.js
-    removeBook: async (parent, args, context) => {
+    removeBook: async (parent, {bookId}, context) => {
       if (context.user) {
       const updatedUser = await User.findOneAndUpdate(
         {_id: context.user._id},

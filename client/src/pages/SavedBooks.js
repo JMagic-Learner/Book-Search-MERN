@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Jumbotron, Container, CardColumns, Card, Button } from 'react-bootstrap';
 import { useQuery, useMutation } from '@apollo/react-hooks';
 import { GET_ME } from '../utils/queries';
 import Auth from '../utils/auth';
+import { saveBookIds } from '../utils/localStorage';
 import { removeBookId } from '../utils/localStorage';
 import '../index.css';
 import '../index.js';
@@ -63,8 +64,11 @@ const SavedBooks = () => {
 
   // if data isn't here yet, say so
   if (loading) {
+    
     return <h2>LOADING...</h2>;
   }
+  const savedBookIds = userData.savedBooks.map((book) => book.bookId);
+  saveBookIds(savedBookIds);
 
   return (
     <>
