@@ -1,6 +1,8 @@
 const express = require('express');
 const { ApolloServer } = require('apollo-server-express');
 const path = require('path');
+const dotenv = require("dotenv")
+dotenv.config()
 
 const { typeDefs, resolvers } = require('./schemas');
 const routes = require('./routes');
@@ -25,6 +27,8 @@ app.use(express.json());
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../client/build/index.html')));
 }
+
+
 
 app.use(routes);
 
