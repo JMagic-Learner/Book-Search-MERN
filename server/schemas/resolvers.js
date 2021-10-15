@@ -40,7 +40,7 @@ const resolvers = {
          { _id: context.user._id },
         { $addToSet: { savedBooks: input }},
        { new: true },
-       {runValidators: true }
+       {runValidators: false }
        );
       
        return updatedUser;
