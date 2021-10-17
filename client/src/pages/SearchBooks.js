@@ -64,11 +64,20 @@ const SearchBooks = () => {
   // create function to handle saving a book to our database
   // Why is this so dang hard.
   const handleSaveBook = async (bookId) => {
-
+    console.log("+++++++++++++++++++++++++++++++++++++++++++++++++++++");
+    console.log("handleSaveBook has been called");
+    console.log("handleSaveBook has been passed the bookId value: " + bookId);
     // // find the book in `searchedBooks` state by the matching id
      const bookToSave = searchedBooks.find((book) => book.bookId === bookId);
 
      const token = Auth.loggedIn() ? Auth.getToken() : null;
+    
+    if(token) {
+      console.log("A token has been found");
+    } else {
+      console.log("The function has not found a token");
+    }
+
 
      if (!token) {
      return false;
